@@ -19,7 +19,62 @@
 
     <nav class="flex justify-between items-center px-6 md:px-12 py-5 bg-white shadow-sm sticky top-0 z-50">
         <div class="flex items-center space-x-2">
-            <div class="w-10 h-10 bg-peaceful-orange rounded-lg flex items-center justify-center text-white font-bold">SS</div>
+           <div class="logo-container">
+    <svg version="1.1" id="clinic-logo" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+         viewBox="0 0 200 300" style="enable-background:new 0 0 200 300;" xml:space="preserve" width="150px">
+        
+        <style type="text/css">
+            /* General styles for the lines */
+            .helix-path {
+                fill: none;
+                stroke-width: 12;
+                stroke-linecap: round;
+                /* This creates the drawing effect setup */
+                stroke-dasharray: 1000;
+                stroke-dashoffset: 1000;
+                /* The animation rule */
+                animation: drawLines 2.5s ease-in-out forwards;
+            }
+
+            /* Specific colors */
+            #red-s { stroke: #D95D39; } /* Your terracotta color */
+            #black-s { 
+                stroke: #222222; 
+                animation-delay: 0.5s; /* Starts slightly later for overlap effect */
+            }
+
+            /* The Animation Keyframes */
+            @keyframes drawLines {
+                to {
+                    stroke-dashoffset: 0;
+                }
+            }
+            
+            /* Text Styling (Simple fade in) */
+            .logo-text {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-weight: 700;
+                opacity: 0;
+                animation: fadeIn 1s ease-in-out 2s forwards;
+            }
+            .sub-text {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                opacity: 0;
+                animation: fadeIn 1s ease-in-out 2.5s forwards;
+            }
+
+            @keyframes fadeIn { to { opacity: 1; } }
+        </style>
+
+        <path id="red-s" class="helix-path" d="M72.5,42.1c0,0,48.2-31.3,75.9,6c24.7,33.1-19.3,68.7-45.8,91C76.5,161,41,200.7,60.2,241.6"/>
+        <path id="black-s" class="helix-path" d="M123.5,79.4c0,0-33.7-28.9-63.9-1.2c-27.1,24.7,8.4,64.5,33.1,84.3c23.5,18.7,51.8,51.2,31.3,88.6"/>
+        
+        <text transform="matrix(1 0 0 1 20 30)" class="logo-text" font-size="16">SRI SAI HOMOEO CLINIC</text>
+        <text transform="matrix(1 0 0 1 55 270)" class="logo-text sub-text" fill="#D95D39">Complete Care</text>
+    </svg>
+</div>
             <div class="text-xl font-bold tracking-tight">Sri Sai <span class="text-peaceful-orange uppercase text-sm">Homeo Clinic</span></div>
         </div>
         <div class="space-x-6 hidden md:flex items-center font-medium">
@@ -58,7 +113,7 @@
                     <div class="w-full aspect-[4/5] bg-gray-200 rounded-2xl overflow-hidden relative z-10 shadow-lg">
                         <img src="dr-srikanth.jpg" alt="Dr. Srikanth" class="w-full h-full object-cover">
                         <div class="absolute inset-0 flex items-center justify-center text-gray-500 text-center px-4">
-                            [Photo of Dr. Srikanth]
+                           
                         </div>
                     </div>
                 </div>
