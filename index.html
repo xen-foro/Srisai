@@ -98,13 +98,17 @@
 
     <section class="relative bg-white overflow-hidden border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col lg:flex-row items-center gap-12">
+            
             <div class="lg:w-1/2 space-y-8 z-10 text-center lg:text-left">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 border border-brand-100 text-brand-600 text-sm font-semibold">
                     <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span> Banjara Hills • Dilshuknagar • Zaheerabad
                 </div>
-                <h1 class="text-5xl lg:text-6xl font-bold tracking-tight text-brand-900 leading-[1.1]">
-                    Hyderabad's Clinic for <span class="text-brand-500">Classical Homeopathy.</span>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-brand-900 leading-[1.2] min-h-[120px] md:min-h-[150px]">
+                    Hyderabad's <br class="hidden sm:block" />
+                    <span id="animated-text" class="text-brand-500 inline-block transition-all duration-500 ease-in-out opacity-100 translate-y-0">Trusted Homeopathy Clinic.</span>
                 </h1>
+
                 <p class="text-lg text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0">
                     Experience root-cause healing. Advanced, side-effect-free personalized constitutional treatments tailored by Dr. Srikanth Kamisetty, M.D.
                 </p>
@@ -123,8 +127,8 @@
                         <img src="clinic-2.jpg" alt="Clinic View 2" class="w-full h-full object-cover">
                     </div>
                 </div>
-                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition z-10 focus:outline-none">&#10094;</button>
-                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition z-10 focus:outline-none">&#10095;</button>
+                <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition z-10 focus:outline-none">❮</button>
+                <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition z-10 focus:outline-none">❯</button>
             </div>
         </div>
     </section>
@@ -315,7 +319,7 @@
     </footer>
 
     <script>
-        // Mobile Menu
+        // --- Mobile Menu ---
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -323,7 +327,35 @@
         btn.addEventListener('click', () => { menu.classList.toggle('hidden'); });
         mobileLinks.forEach(link => { link.addEventListener('click', () => { menu.classList.add('hidden'); }); });
 
-        // Carousel Logic (Configured for clinic-1.jpg and clinic-2.jpg)
+        // --- Animated Headline Logic ---
+        const phrases = [
+            "Trusted Homeopathy Clinic.",
+            "Top Rated Doctor.",
+            "Dedicated 24/7 Support.",
+            "Classical Homeopathy."
+        ];
+        let phraseIndex = 0;
+        const animatedText = document.getElementById('animated-text');
+
+        if (animatedText) {
+            setInterval(() => {
+                // Trigger Fade Out & Drop Down
+                animatedText.classList.remove('opacity-100', 'translate-y-0');
+                animatedText.classList.add('opacity-0', 'translate-y-2');
+                
+                setTimeout(() => {
+                    // Change Text
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    animatedText.innerText = phrases[phraseIndex];
+                    
+                    // Trigger Fade In & Rise Up
+                    animatedText.classList.remove('opacity-0', 'translate-y-2');
+                    animatedText.classList.add('opacity-100', 'translate-y-0');
+                }, 500); // Waits for the 500ms CSS transition to finish before swapping text
+            }, 3000); // Runs the cycle every 3 seconds
+        }
+
+        // --- Carousel Logic ---
         let currentSlide = 0;
         const totalSlides = 2; 
         const track = document.getElementById('carousel-track');
@@ -333,20 +365,17 @@
                 track.style.transform = `translateX(-${currentSlide * 100}%)`;
             }
         }
-
         function nextSlide() {
             currentSlide = (currentSlide + 1) % totalSlides;
             updateCarousel();
         }
-
         function prevSlide() {
             currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
             updateCarousel();
         }
+        setInterval(nextSlide, 4000);
 
-        setInterval(nextSlide, 4000); // Auto-scrolls every 4 seconds
-
-        // Map Switching Logic 
+        // --- Map Switching Logic ---
         function changeMap(location) {
             const cards = document.querySelectorAll('.map-card');
             
